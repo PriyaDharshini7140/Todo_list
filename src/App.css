@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: yellowgreen;
 }
 
 .App-logo {
@@ -12,7 +13,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.cardbg{
+  background-color:rgb(37, 214, 191);
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -1,20 +1,16 @@
 import React, {Component} from 'react';
-import ListGroup from 'react-bootstrap/ListGroup'; 
-import Row from 'react-bootstrap/Row'; 
-import Col from 'react-bootstrap/Col'; 
+import './View.css';
+import Button from 'react-bootstrap/Button'; 
+
 
 class View extends Component { 
   render(){
-     
-      const items = this.props.add.map((e)=>{return (<div key={e.id}>
-         <Row> 
-	<Col md={{ span: 5, offset: 4 }}> 
-         <ListGroup.Item variant="danger" action 
-			onClick = { () => {this.props.remove(e.id)} }> 
-			 {e.todo}
-			</ListGroup.Item> 
-            </Col> 
-         </Row> 
+     const item = this.props.add;
+      const items = item.map((e)=>{return (<div className="view" key={e.id}>
+        <p>
+       <input type="text" id={e.id} value={e.todo} onChange={(a)=>{this.props.update(e.id,a.target.value)}}/>
+       <Button variant="secondary" onClick={()=>{this.props.remove(e.id)}}>Delete</Button>
+           </p>
    </div>)
       })
     return( 
