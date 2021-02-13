@@ -6,19 +6,22 @@ class Todo extends Component {
     userInput :" ", 
     } 
   } 
- 
+  handleChange = e => {
+    this.setState({userInput:e.target.value})
+  };
+
 render(){
-    const {userInput} = this.state 
+  
+    const {userInput} = this.state;
     return( 
-     
-     <div>
-   <input placeholder="enter task" type="text" value={userInput} onChange={e=> this.setState({userInput:e.target.value})} />
-         <button onClick={()=> {
+       <div>
+      <input className="todo-input edit" value={userInput} onChange={this.handleChange }></input>
+    <button className="todo-button edit"  onClick={()=> {
              this.props.addItem(userInput);
              this.setState({userInput:""})
-             }}>add</button>
-     
-     </div>
+             }}>addItem</button>
+
+</div>
      
     ); 
   }

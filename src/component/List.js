@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import SimpleModal from './component';
 import Todo from './Todo';
 import View from './View';
 
@@ -6,7 +7,8 @@ class List extends Component {
   constructor(props) { 
     super(props); 
     this.state= { 
-           list:[], 
+           list:[],
+           
     } 
   } 
   addHandler=(text)=>{ 
@@ -22,26 +24,18 @@ class List extends Component {
 const filter = arrCopy.filter((e)=>e.id !== id)
   this.setState({list:filter})
 };
-updateHandler=(key,text)=>{
-  console.log(key,text);
-  const arrCopy = [...this.state.list]
-   arrCopy.forEach((e)=>{
-      if(e.id === key){
-       e.todo=text
-      }
-   })
-   console.log(arrCopy);
-   this.setState({list:arrCopy})
-
-}
+updateHandler=()=>{
+  console.log("update");
+  
+  }
    render(){
+
     return( 
       <div>
         <center>
-        <Todo addItem={this.addHandler}></Todo>
+         <Todo addItem={this.addHandler}></Todo>
         <View add={this.state.list} remove={this.removeHandler} update={this.updateHandler}></View>
-       
-         </center>
+        </center>
       </div>
     ); 
   }
