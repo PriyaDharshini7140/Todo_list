@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from 'react-bootstrap/Button';
 import Modal from '@material-ui/core/Modal';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
@@ -34,8 +35,7 @@ export default function SimpleModal(props) {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [Update,setUpdate]=useState("");
-
+  const [Update,setUpdate]=useState({id:props.id,todo:props.todo});
   const handleOpen = () => {
     setOpen(true);
   };
@@ -44,17 +44,19 @@ export default function SimpleModal(props) {
     setOpen(false);
   };
   console.log(Update);
- const button=(<button className='todo-button' onClick={()=>props.val(Update)}>update</button>)
+
+ const button=(<Button className='todo-button' onClick={()=>{props.update(Update)}}>update</Button>)
 
   const body = (
     <div style={modalStyle} className="todo-modal">
       <h2 id="simple-modal-title">Enter to edit</h2>
       <p id="simple-modal-description">
-       <input className="todo-input edit" onChange={(e)=> setUpdate(e.target.value)}></input>
+       <input className="todo-input edit" onChange={(e)=> setUpdate({id:props.id,todo:e.target.value})} value={Update.todo}></input>
       </p>
       {button}
     </div>
   );
+ 
 const pen=(<div>
      <FontAwesomeIcon className="edit-icon" onClick={handleOpen} icon="edit"></FontAwesomeIcon>
     <Modal
@@ -68,7 +70,8 @@ const pen=(<div>
   </div>);
   return (
     <div>
-     {pen}
+   {pen}
+   {pen.body}
 </div>
   );
 }
