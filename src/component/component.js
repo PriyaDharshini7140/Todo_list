@@ -51,7 +51,7 @@ export default function SimpleModal(props) {
     <div style={modalStyle} className="todo-modal">
       <h2 id="simple-modal-title">Enter to edit</h2>
       <p id="simple-modal-description">
-       <input className="todo-input edit" onChange={(e)=> setUpdate({id:props.id,todo:e.target.value})} value={Update.todo}></input>
+       <input className="todo-input edit" onChange={(e)=> setUpdate({id:props.id,todo:e.target.value})}></input>
       </p>
       {button}
     </div>
