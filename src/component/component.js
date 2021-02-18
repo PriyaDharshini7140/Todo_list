@@ -45,19 +45,19 @@ function SimpleModal(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(Update);
-const handleUpdate =(id,text)=>{
+  // console.log(Update);
+const handleUpdate =(text)=>{
   console.log(text);
   const arrCopy = [... props.list]
   console.log(arrCopy);
  arrCopy.forEach((e)=>{
-   if(e.id === id){
-     e.todo =text
+   if(e.id === text.id){
+     e.todo =text.todo
    }
  })
- props.onUpdateTodo(id,text)
+ props.onUpdateTodo(arrCopy)
      }
- const button=(<Button className='todo-button' onClick={()=>{handleUpdate(Update.id,Update.todo)}}>update</Button>)
+ const button=(<Button className='todo-button' onClick={()=>{handleUpdate(Update)}}>update</Button>)
 
   const body = (
     <div style={modalStyle} className="todo-modal">
@@ -95,11 +95,10 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps=(dispatch)=>{
   return{
-      onUpdateTodo : (id,text)=>dispatch({
+      onUpdateTodo : (Update)=>dispatch({
         type:'UPDATE_TODO',
-        payload:{
-          id,text
-        }
+        payload:Update
+        
       }),
   }
 }
