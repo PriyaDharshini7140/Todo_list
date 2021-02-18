@@ -7,18 +7,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { ThemeProvider } from '@material-ui/core';
 
 class List extends Component { 
-
-// updateHandler=(id)=>{
-//   console.log(id);
-//   const arrCopy = [... this.state.list]
-//  arrCopy.forEach((e)=>{
-//    if(e.id === id.id){
-//      e.todo =id.todo
-//    }
-//  })
-//  this.setState({list:arrCopy})
-// }
-  
    render(){
    const items= this.props.list.map(((e)=>{return (<div className='todo-row' key={e.id}>
     {e.todo}
@@ -26,7 +14,7 @@ class List extends Component {
       <FontAwesomeIcon className="delete-icon" onClick={()=>{
      this.props.onDeleteTodo(e.id);
    }} icon="trash"></FontAwesomeIcon>
-   <SimpleModal update={this.props.onUpdateTodo(e.id)}></SimpleModal>
+   <SimpleModal id={e.id} todo={e.todo}></SimpleModal>
    </div>
  </div>)
   })
@@ -50,10 +38,6 @@ const mapDispatchToProps=(dispatch)=>{
   return{
       onDeleteTodo : (id)=>dispatch({
         type:'DELETE_TODO',
-        payload:id
-      }),
-      onUpdateTodo : (id)=>dispatch({
-        type:'UPDATE_TODO',
         payload:id
       }),
   }

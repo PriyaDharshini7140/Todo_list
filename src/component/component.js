@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
 import Modal from '@material-ui/core/Modal';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {connect} from 'react-redux';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -30,12 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal(props) {
+function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [Update,setUpdate]=useState("");
+
+  const [Update,setUpdate]=useState({id:props.id,todo:props.todo});
   const handleOpen = () => {
     setOpen(true);
   };
@@ -44,14 +46,24 @@ export default function SimpleModal(props) {
     setOpen(false);
   };
   console.log(Update);
-
- const button=(<Button className='todo-button' onClick={()=>{console.log("com update")}}>update</Button>)
+const handleUpdate =(id,text)=>{
+  console.log(text);
+  const arrCopy = [... props.list]
+  console.log(arrCopy);
+ arrCopy.forEach((e)=>{
+   if(e.id === id){
+     e.todo =text
+   }
+ })
+ props.onUpdateTodo(id,text)
+     }
+ const button=(<Button className='todo-button' onClick={()=>{handleUpdate(Update.id,Update.todo)}}>update</Button>)
 
   const body = (
     <div style={modalStyle} className="todo-modal">
       <h2 id="simple-modal-title">Enter to edit</h2>
       <p id="simple-modal-description">
-       <input className="todo-input edit" onChange={(e)=> setUpdate(e.target.value)}></input>
+       <input className="todo-input edit" onChange={(e)=> setUpdate({id:props.id,todo:e.target.value})}></input>
       </p>
       {button}
     </div>
@@ -72,7 +84,23 @@ const pen=(<div>
   return (
     <div>
    {pen}
-   {pen.body}
 </div>
   );
 }
+const mapStateToProps=(state)=>{
+  console.log(state);
+  return{
+        list:state.list
+  }
+}
+const mapDispatchToProps=(dispatch)=>{
+  return{
+      onUpdateTodo : (id,text)=>dispatch({
+        type:'UPDATE_TODO',
+        payload:{
+          id,text
+        }
+      }),
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(SimpleModal);

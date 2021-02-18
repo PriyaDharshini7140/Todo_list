@@ -13,11 +13,7 @@ const reducer=(state=initialState,action)=>{
     }
     else if(action.type === 'UPDATE_TODO'){
         return{...state,
-          list:state.list.forEach((e)=>{
-            if(e.id === action.payload.id){
-              e.todo =action.payload.todo
-            }
-          })
+            list:[...state.list,action.payload],
         }
 
           
