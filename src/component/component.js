@@ -43,7 +43,7 @@ export default function SimpleModal(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(Update);
+  // console.log(Update);
 
  const button=(<Button className='todo-button' onClick={()=>{props.update(Update)}}>update</Button>)
 
