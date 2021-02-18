@@ -35,7 +35,7 @@ const mapDispatchToProps=(dispatch)=>{
           id:Math.round(Math.random()*1000),
           todo:user
         }
-      }),
+      })
   }
 }
 

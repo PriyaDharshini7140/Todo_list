@@ -35,7 +35,7 @@ export default function SimpleModal(props) {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [Update,setUpdate]=useState({id:props.id,todo:props.todo});
+  const [Update,setUpdate]=useState("");
   const handleOpen = () => {
     setOpen(true);
   };
@@ -43,15 +43,15 @@ export default function SimpleModal(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  // console.log(Update);
+  console.log(Update);
 
- const button=(<Button className='todo-button' onClick={()=>{props.update(Update)}}>update</Button>)
+ const button=(<Button className='todo-button' onClick={()=>{console.log("com update")}}>update</Button>)
 
   const body = (
     <div style={modalStyle} className="todo-modal">
       <h2 id="simple-modal-title">Enter to edit</h2>
       <p id="simple-modal-description">
-       <input className="todo-input edit" onChange={(e)=> setUpdate({id:props.id,todo:e.target.value})}></input>
+       <input className="todo-input edit" onChange={(e)=> setUpdate(e.target.value)}></input>
       </p>
       {button}
     </div>
@@ -68,6 +68,7 @@ const pen=(<div>
       {body}
     </Modal>
   </div>);
+  
   return (
     <div>
    {pen}
