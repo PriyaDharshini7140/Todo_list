@@ -1,6 +1,5 @@
 import './App.css';
 import React, {Component} from 'react';
-import List from './component/List';
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import {faEdit} from '@fortawesome/free-solid-svg-icons'
@@ -17,8 +16,8 @@ class App extends Component {
       <div className="todo-app">
         <BrowserRouter>
         <h1>TODO LIST</h1>
-    <Route path="/" exact render={(props)=><Todo{...props}/>}/>
-    <Route path="/edit" exact render={()=><Router/>}/>
+    <Route path="/" exact render={(props)=><Todo {...props}/>}/>
+    <Route path="/edit" exact render={(props)=><Router {...props}/>}/>
       
      </BrowserRouter>
     </div>     

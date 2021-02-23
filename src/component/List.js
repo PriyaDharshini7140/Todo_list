@@ -5,18 +5,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 
 class List extends Component { 
-
-  handleRender=()=>{
-    this.props.history.push("/edit");
-  }
    render(){
+    console.log(this.props.history);
    const items= this.props.list.map(((e)=>{return (<div className='todo-row' key={e.id}>
     {e.todo}
     <div className="icons">
       <FontAwesomeIcon className="delete-icon" onClick={()=>{
      this.props.onDeleteTodo(e.id);
    }} icon="trash"/>
-   <FontAwesomeIcon className="edit-icon" onClick={this.handleRender} icon="edit"/>
+   <FontAwesomeIcon className="edit-icon" onClick={()=>this.props.history.push({pathname:"/edit",state:e.id})} icon="edit"/>
    </div>
  </div>)
   })
