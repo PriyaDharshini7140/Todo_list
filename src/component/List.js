@@ -1,20 +1,22 @@
 import React, {Component} from 'react';
-import SimpleModal from './component';
-import Todo from './Todo';
 import {connect} from 'react-redux';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { ThemeProvider } from '@material-ui/core';
+
 
 class List extends Component { 
+
+  handleRender=()=>{
+    this.props.history.push("/edit");
+  }
    render(){
    const items= this.props.list.map(((e)=>{return (<div className='todo-row' key={e.id}>
     {e.todo}
     <div className="icons">
       <FontAwesomeIcon className="delete-icon" onClick={()=>{
      this.props.onDeleteTodo(e.id);
-   }} icon="trash"></FontAwesomeIcon>
-   <SimpleModal id={e.id} todo={e.todo}></SimpleModal>
+   }} icon="trash"/>
+   <FontAwesomeIcon className="edit-icon" onClick={this.handleRender} icon="edit"/>
    </div>
  </div>)
   })

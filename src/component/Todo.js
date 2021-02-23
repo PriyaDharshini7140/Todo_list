@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import List from './List';
 class Todo extends Component { 
+  
   constructor(props) { 
     super(props); 
     this.state = { 
@@ -12,18 +14,20 @@ class Todo extends Component {
   };
 
 render(){
-  
     const {userInput} = this.state;
     return( 
+      <>
        <div>
       <input className="todo-input edit" value={userInput} onChange={this.handleChange}></input>
     <button className="todo-button edit"  onClick={()=>{
-      {this.props.onAddTodo(userInput)
-      this.setState({userInput:""})}
+      // eslint-disable-next-line no-lone-blocks
+      {this.props.onAddTodo(userInput);
+        this.setState({userInput:""})}
     }}>addItem</button>
-
+    <List history={this.props.history}/>
 </div>
-     
+
+</>   
     ); 
   }
 }
